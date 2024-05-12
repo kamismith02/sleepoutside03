@@ -3,10 +3,10 @@ import { renderListWithTemplate } from './utils.mjs';
 function productCardTemplate(product) {
     return `<li class="product-card">
           <a href="product_pages/index.html?product=${product.Id}">
-            <img 
-                src="${product.Image}" 
+          <img
+                src="${product.Images.PrimaryMedium}"
                 alt="Image of ${product.Name}"
-                />
+            />
             <h3 class="card__brand">${product.Brand.Name}</h3>
             <h2 class="card__name">${product.Name}</h2>
             <p class="product-card__price">$${product.FinalPrice}</p>
@@ -22,15 +22,20 @@ export default class ProductListing {
     }
 
     async init() {
-        const productList = await this.dataSource.getData();
+        const list = await this.dataSource.getData(this.category);
         this.renderList(list);
-    }
-
-    filterTents(list) {
-        return list.slice(0, 4);
+        document.querySelector(".title").innerHTML = this.category;
     }
 
     renderList(list) {
-        renderListWithTemplate(productCardTemplate, this.listElement, list);
-    }
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
+
+    // filterTents(list) {
+    //    return list.slice(0, 4);
+    // }
+
+    //renderList(list) {
+    //    renderListWithTemplate(productCardTemplate, this.listElement, list);
+    // }
 }
