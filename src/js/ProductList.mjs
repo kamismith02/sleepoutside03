@@ -39,3 +39,38 @@ export default class ProductListing {
     //    renderListWithTemplate(productCardTemplate, this.listElement, list);
     // }
 }
+
+const sortSelect = document.getElementById('sort');
+const productListElement = document.querySelector('.product-list');
+
+// Function to render the product list
+function renderProductList(productList) {
+    productListElement.innerHTML = '';
+    productList.forEach(product => {
+        // Render each product item
+        const productItem = document.createElement('li');
+        productItem.textContent = `${product.name} - $${product.price}`;
+        productListElement.appendChild(productItem);
+    });
+}
+
+// Function to sort the product list
+function sortProductList(sortBy) {
+    if (sortBy === 'name') {
+        // Sort by name
+        productList.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === 'price') {
+        // Sort by price
+        productList.sort((a, b) => a.price - b.price);
+    }
+}
+
+// Event listener for sorting
+sortSelect.addEventListener('change', (event) => {
+    const sortBy = event.target.value;
+    sortProductList(sortBy);
+    renderProductList(productList);
+});
+
+// Initial rendering
+renderProductList(productList);
