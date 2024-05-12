@@ -21,6 +21,17 @@ function addProductToCart(product) {
 // add to cart button event handler
 async function addToCartHandler(e) {
   const product = await dataSource.findProductById(e.target.dataset.id);
+  // Calculate discount amount and percentage
+  const originalPrice = product.price;
+  const discountedPrice = 59.99; // Assuming a discounted price for demonstration
+  const discountAmount = originalPrice - discountedPrice;
+  const discountPercentage = ((discountAmount / originalPrice) * 100).toFixed(0);
+
+  // Add the discount information to the product object
+  product.discountAmount = discountAmount;
+  product.discountPercentage = discountPercentage;
+
+  // Add the product to the cart
   addProductToCart(product);
 }
 
