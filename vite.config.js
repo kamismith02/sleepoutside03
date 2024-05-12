@@ -14,6 +14,7 @@ export default defineConfig({
       ),
 
     },
+    external: ['.ProductData.mjs']
   },
 },
 });
