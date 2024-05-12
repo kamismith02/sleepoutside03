@@ -13,12 +13,14 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
+  let discountHTML = '';
+  if (item.discountAmount && item.discountPercentage) {
+    discountHTML = `<p class="cart-card__discount">Save $${item.discountAmount} (${item.discountPercentage}%)</p>`;
+  }
+
   const newItem = `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
-      <img
-        src="${item.Image}"
-        alt="${item.Name}"
-      />
+      <img src="${item.Image}" alt="${item.Name}" />
     </a>
     <a href="#">
       <h2 class="card__name">${item.Name}</h2>
@@ -26,6 +28,7 @@ function cartItemTemplate(item) {
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <p class="cart-card__quantity">qty: 1</p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
+    ${discountHTML}
   </li>`;
 
   return newItem;
